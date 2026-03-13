@@ -36,10 +36,12 @@ function App() {
             <span className="text-indigo-400">AI</span> Innovator
           </span>
           <a
-            href="#signup"
+            href="https://github.com/aipmtw/mark/issues"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-indigo-600 hover:bg-indigo-500 transition px-5 py-2 rounded-lg text-sm font-medium"
           >
-            報名參加
+            issues 填寫
           </a>
         </nav>
 
