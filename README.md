@@ -1,4 +1,4 @@
-###   https://aipmtw.github.io/ai-innovator/
+###   https://aipmtw.github.io/mark/
 # 例會 Keynote Speech 與實作參與公告
 
 下次例會，我會有一段 keynote speech，主題會圍繞在：
