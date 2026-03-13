@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import ChangeLog from "./ChangeLog";
 
 const directions = [
   {
@@ -26,6 +27,30 @@ const prepSteps = [
 ];
 
 function App() {
+  const [page, setPage] = useState(
+    window.location.hash === "#changelog" ? "changelog" : "home"
+  );
+
+  useEffect(() => {
+    function handleHash() {
+      setPage(window.location.hash === "#changelog" ? "changelog" : "home");
+    }
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
+  function goToChangelog() {
+    window.location.hash = "#changelog";
+  }
+
+  function goToHome() {
+    window.location.hash = "";
+  }
+
+  if (page === "changelog") {
+    return <ChangeLog onBack={goToHome} />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white">
       {/* Hero Section */}
@@ -35,14 +60,22 @@ function App() {
           <span className="text-xl font-bold tracking-tight">
             <span className="text-indigo-400">AI</span> Innovator
           </span>
-          <a
-            href="https://github.com/aipmtw/mark/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-indigo-600 hover:bg-indigo-500 transition px-5 py-2 rounded-lg text-sm font-medium"
-          >
-            issues 填寫
-          </a>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={goToChangelog}
+              className="bg-emerald-600 hover:bg-emerald-500 transition px-5 py-2 rounded-lg text-sm font-medium"
+            >
+              變更紀錄
+            </button>
+            <a
+              href="https://github.com/aipmtw/mark/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-indigo-600 hover:bg-indigo-500 transition px-5 py-2 rounded-lg text-sm font-medium"
+            >
+              issues 填寫
+            </a>
+          </div>
         </nav>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 pt-20 pb-28 text-center">
@@ -63,6 +96,23 @@ function App() {
           </p>
         </div>
       </header>
+
+      {/* Changelog Banner */}
+      <section className="max-w-6xl mx-auto px-6 -mt-10 mb-10 relative z-20">
+        <button
+          onClick={goToChangelog}
+          className="w-full bg-gradient-to-r from-emerald-600/90 to-teal-600/90 backdrop-blur border border-emerald-400/30 rounded-2xl p-6 flex items-center justify-between hover:from-emerald-500/90 hover:to-teal-500/90 transition group"
+        >
+          <div className="flex items-center gap-4">
+            <span className="text-3xl">📋</span>
+            <div className="text-left">
+              <h3 className="text-lg font-bold">變更紀錄</h3>
+              <p className="text-emerald-100 text-sm">查看專案所有提交紀錄、時間與摘要說明</p>
+            </div>
+          </div>
+          <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
+        </button>
+      </section>
 
       {/* Activity Directions */}
       <section className="max-w-6xl mx-auto px-6 py-20">
