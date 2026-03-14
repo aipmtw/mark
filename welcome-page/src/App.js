@@ -57,9 +57,12 @@ function App() {
       <header className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-500/20 via-transparent to-transparent"></div>
         <nav className="relative z-10 max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
-          <span className="text-xl font-bold tracking-tight">
-            <span className="text-indigo-400">AI</span> Innovator
-          </span>
+          <div className="flex items-center gap-4">
+            <a href="https://aipm.com.tw/" className="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 px-3 py-1.5 rounded-lg transition">← aipm.com.tw</a>
+            <span className="text-xl font-bold tracking-tight">
+              <span className="text-indigo-400">AI</span> Innovator
+            </span>
+          </div>
           <div className="flex items-center gap-3">
             <button
               onClick={goToChangelog}
