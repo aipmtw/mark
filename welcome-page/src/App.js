@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ChangeLog from "./ChangeLog";
+import DailyNotes from "./DailyNotes";
 
 const directions = [
   {
@@ -27,13 +28,19 @@ const prepSteps = [
 ];
 
 function App() {
-  const [page, setPage] = useState(
-    window.location.hash === "#changelog" ? "changelog" : "home"
-  );
+  const [page, setPage] = useState(() => {
+    const hash = window.location.hash;
+    if (hash === "#changelog") return "changelog";
+    if (hash === "#dailynotes") return "dailynotes";
+    return "home";
+  });
 
   useEffect(() => {
     function handleHash() {
-      setPage(window.location.hash === "#changelog" ? "changelog" : "home");
+      const hash = window.location.hash;
+      if (hash === "#changelog") setPage("changelog");
+      else if (hash === "#dailynotes") setPage("dailynotes");
+      else setPage("home");
     }
     window.addEventListener("hashchange", handleHash);
     return () => window.removeEventListener("hashchange", handleHash);
@@ -47,8 +54,16 @@ function App() {
     window.location.hash = "";
   }
 
+  function goToDailyNotes() {
+    window.location.hash = "#dailynotes";
+  }
+
   if (page === "changelog") {
     return <ChangeLog onBack={goToHome} />;
+  }
+
+  if (page === "dailynotes") {
+    return <DailyNotes onBack={goToHome} />;
   }
 
   return (
@@ -64,6 +79,12 @@ function App() {
             </span>
           </div>
           <div className="flex items-center gap-3">
+            <button
+              onClick={goToDailyNotes}
+              className="bg-cyan-600 hover:bg-cyan-500 transition px-5 py-2 rounded-lg text-sm font-medium"
+            >
+              Daily Notes
+            </button>
             <button
               onClick={goToChangelog}
               className="bg-emerald-600 hover:bg-emerald-500 transition px-5 py-2 rounded-lg text-sm font-medium"
